@@ -1,0 +1,16 @@
+{
+  "name": "certification",
+  "version": "1.0.0",
+  "description": "Topics are listed at this site: https://www.nodecertification.com/",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nicola Da Rold",
+  "license": "MIT"
+}
