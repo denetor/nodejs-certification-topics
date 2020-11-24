@@ -8,8 +8,16 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
+
+/**
+ * Streams
+ */
 app.get('/streams/hello', (req, res) => {
     streamsModule.helloStreams(req, res);
+});
+
+app.get('/streams/writable', (req, res) => {
+    streamsModule.writable();
 });
 
 app.listen(port, () => {
