@@ -9,7 +9,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/streams/hello', (req, res) => {
-    res.send(streamsModule.helloStreams());
+    streamsModule.helloStreams(req, res);
 });
 
 app.listen(port, () => {
