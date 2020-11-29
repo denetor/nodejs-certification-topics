@@ -35,6 +35,15 @@ module.exports = {
         readStream.pipe(writeStream);
     },
 
+
+    getTransformStream: function() {
+        var Readable = require('stream').Readable;
+        var readStream = new Readable();
+        readStream._read = function () {};
+        readStream.push('hello');
+        return readStream;
+    }
+
 };
 
 
