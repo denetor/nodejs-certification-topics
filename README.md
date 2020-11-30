@@ -5,7 +5,7 @@ https://www.nodecertification.com/
 
 #### Node.js Application Developer Certification (JSNAD)
 - [x] Buffers
-- [ ] Streams
+- [x] Streams
 - [ ] Control flow
 - [ ] Child processes
 - [ ] Debugging

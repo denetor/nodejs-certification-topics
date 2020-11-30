@@ -26,16 +26,20 @@ app.get('/buffers/iterate', (req, res) => {
  * Streams
  */
 app.get('/streams/hello', (req, res) => {
-    streamsModule.helloStreams(req, res);
+    streamsModule.hello();
 });
 
-app.get('/streams/writable', (req, res) => {
+app.get('/streams/writable', () => {
     streamsModule.writable();
 });
 
-// app.get('/streams/transform', (req, res) => {
-//     res.end(streamsModule.getTransformStream());
-// });
+app.get('/streams/transform', () => {
+    streamsModule.getTransformStream();
+});
+
+app.get('/streams/getfile', (req,res) => {
+    streamsModule.getFile(__dirname + '/../README.md').pipe(res);
+});
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);

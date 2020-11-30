@@ -1,14 +1,11 @@
+const stream = require('stream');
+
 module.exports = {
 
-	/**
-	 * First readable stream creation and piping to stdout
-	 *
-	 * @param req
-	 * @param res
-	 */
-    helloStreams: function(req, res) {
-	    var Readable = require('stream').Readable;
-	    var readStream = new Readable();
+	// create a readable stream and sends data
+    // pipe output to console
+    hello: function() {
+	    var readStream = new stream.Readable();
 	    readStream.push('hello');           // add items to stream
 	    readStream.push(' ');
 	    readStream.push('nodejs');
@@ -19,11 +16,11 @@ module.exports = {
     },
 
 
+    // create a read and a write stream
+    // send some data in the read stream and pipe it to the write stream
     writable: function() {
-        var Readable = require('stream').Readable;
-        var Writable = require('stream').Writable;
-        var readStream = new Readable();
-        var writeStream = new Writable();
+        var readStream = new stream.Readable();
+        var writeStream = new stream.Writable();
 
         writeStream._write = function (chunk, enc, next) {
             console.log(chunk);
@@ -36,13 +33,29 @@ module.exports = {
     },
 
 
+    // create a read stream and a transform stream
     getTransformStream: function() {
-        var Readable = require('stream').Readable;
-        var readStream = new Readable();
-        readStream._read = function () {};
-        readStream.push('hello');
-        return readStream;
+        var readStream = new stream.Readable();
+        readStream._read = function() {};
+        readStream.push('Hello!');
+        // create transform stream
+        var transformStream = new stream.Transform();
+        transformStream._transform = function(chunk, encoding, next) {
+            // chunk is a Buffer. Transform into string, uppercase it
+            // and send output to this transform stream
+            this.push(chunk.toString().toUpperCase());
+            next();
+        }
+        readStream.pipe(transformStream).pipe(process.stdout);
+    },
+
+
+    // create a readstream from a file and returns it
+    getFile: function(fileName) {
+        const fs = require('fs');
+        return fs.createReadStream(fileName);
     }
+
 
 };
 
