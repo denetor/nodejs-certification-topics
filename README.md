@@ -5,6 +5,8 @@ Topics are listed at this site:
 https://www.nodecertification.com/
 
 ### Node.js Application Developer Certification (JSNAD)
+- [x] [Module system](#modules)
+- [x] [Events](#Events)
 - [x] [Buffers](#Buffers)
 - [x] [Streams](#Streams)
 - [x] [Control flow](#control-flow)
@@ -12,10 +14,8 @@ https://www.nodecertification.com/
 - [ ] Debugging
 - [ ] Error handling
 - [ ] CLI
-- [x] [Events](#Events)
 - [ ] File system
 - [ ] Javascript prerequisites
-- [x] [Module system](#modules)
 - [ ] Process/Operating system
 - [ ] Package.json
 - [ ] Unt testing
@@ -35,6 +35,157 @@ https://www.nodecertification.com/
 
 ### Other learning resources
 - https://nodejs.dev/learn
+
+
+\pagebreak
+# Modules
+`require` and `module` are the two modules available in global scope used to manage modules.
+In each module, `exports` is a special object (empty by deafault) returned by the `require` function.
+
+```js
+const config = require('/path/to/file');
+```
+
+### Resolving
+Required file is resolved searching, in order, files with the following extensions: js, json, node.
+The latter is a c++ file, compiled with node-gyp.
+
+A list of the paths where a required file is searched, is given by `module.paths`:
+```
+$ node
+> module.paths
+[
+  '/home/nicola/nodeprojects/node-certification/repl/node_modules',
+  '/home/nicola/nodeprojects/node-certification/node_modules',
+  '/home/nicola/nodeprojects/node_modules',
+  '/home/nicola/node_modules',
+  '/home/node_modules',
+  '/node_modules',
+  '/home/nicola/.node_modules',
+  '/home/nicola/.node_libraries',
+  '/usr/local/lib/node'
+]
+```
+
+You may **require a folder**: node will search for an index.js in it to import.
+
+`require.resolve('file')` only returns the resolved file path or throws an error when no file is found on paths.
+
+### Loading
+`require()` loads end evaluates files in synchronous mode. Loading a file, its code is executed.
+A loaded module contains a stucture like this:
+```
+{
+  id: '.',
+  exports: {},
+  parent: null,
+  filename: '/Users/samer/learn-node/index.js',
+  loaded: false,
+  children: [],
+  paths: [ ... ]
+}
+```
+
+#### Modules dependency
+When referencing a module from another module, since node executes the code sequentially,
+the lines following requiring module2 are executed after module2 has been required and executed.
+For ths reason module2 does not know the existance of module1.b and moduls2.c
+```
+// module1.js
+exports.a = 1;
+require('module2');
+exports.b = 2;
+exports.c = 3;
+
+// module2.js
+const Module1 = require('./module1');
+console.log('Module1 is partially loaded here', Module1)
+
+// output:
+Module1 is partially loaded here { a: 1 }
+```
+
+Note: `module.exports` cannot be changed at runtime, once it's set it's set.
+
+### Requiring JSON files
+Node recognizes JSON required files. As example, this config.json:
+```json
+{
+  "host": "localhost",
+  "port": 8080
+}
+```
+
+Can be imported this way:
+```js
+const { host, port } = require('./config');
+console.log(`Server will run at http://${host}:${port}`);
+```
+
+### Modules resources:
+- https://www.freecodecamp.org/news/requiring-modules-in-node-js-everything-you-need-to-know-e7fbd119be8/
+
+
+
+\pagebreak
+# Events
+Promises and many other features are made with event management.
+Events are used trough EventEmitter class.
+
+## Creating, listening and emitting
+```js
+// creating an EventEmitter
+const myEmitter = new EventEmitter();
+
+// registering three callbacks. 
+myEmitter.on('eventOne', callback1);
+myEmitter.on('eventOne', callback2);
+myEmitter.addListener('eventOne', callback3);   // on and addListener are synonyms
+
+// emitting the event
+myEmitter.emit('eventOne'); // all the three callbacks will be called
+```
+
+## Once listener
+Registers for an event that may be emitted only once. Internally, when the event is
+listened for the first time, all its listeners will be removed.
+```js
+const myEmitter = new EventEmitter();
+myEmitter.once('myEvent', myCallback);
+
+myEmitter.emit('myEvent');  // lauches callback
+myEmitter.emit('myEvent');  // does not launch any callback again
+```
+
+## Callback parameters
+We can add parameters to callbacks
+```js
+myEmitter.on('status', (code, msg)=> console.log(`Got ${code} and ${msg}`));
+myEmitter.emit('status', 200, 'ok');    // Got 200 and ok
+```
+
+## Unregistering events
+You can remove listeners with `off` (or with `removeListener`):
+```js
+myEmitter.off('eventOne');
+myEmitter.removeListener('eventOne', myCallback);
+```
+
+## Getting listeners
+If you need the list of listeners linked to an event:
+```js
+const myEmitter = new EventEmitter();
+myEmitter.on('eventOne', myCallback);
+
+console.log(myEmitter.listenerCount());         // 1
+console.log(myEmitter.listeners('eventOne'));   // array of listeners
+console.log(myEmitter.rawListeners('eventOne'));   // array of listeners, including wrappers linke .once()
+```
+
+### Events resources
+- https://www.freecodecamp.org/news/how-to-code-your-own-event-emitter-in-node-js-a-step-by-step-guide-e13b7e7908e1/
+- https://nodejs.org/dist/latest-v14.x/docs/api/events.html
+
 
 \pagebreak
 # Buffers
@@ -455,151 +606,8 @@ catchAsync.catch(error => console.log('Uh oh!', error));
 - https://heynode.com/tutorial/use-asyncawait-promises
 
 
-\pagebreak
-# Events
-Promises and many other features are made with event management.
-Events are used trough EventEmitter class.
 
-## Creating, listening and emitting
-```js
-// creating an EventEmitter
-const myEmitter = new EventEmitter();
 
-// registering three callbacks. 
-myEmitter.on('eventOne', callback1);
-myEmitter.on('eventOne', callback2);
-myEmitter.addListener('eventOne', callback3);   // on and addListener are synonyms
 
-// emitting the event
-myEmitter.emit('eventOne'); // all the three callbacks will be called
-```
-
-## Once listener
-Registers for an event that may be emitted only once. Internally, when the event is
-listened for the first time, all its listeners will be removed.
-```js
-const myEmitter = new EventEmitter();
-myEmitter.once('myEvent', myCallback);
-
-myEmitter.emit('myEvent');  // lauches callback
-myEmitter.emit('myEvent');  // does not launch any callback again
-```
-
-## Callback parameters
-We can add parameters to callbacks
-```js
-myEmitter.on('status', (code, msg)=> console.log(`Got ${code} and ${msg}`));
-myEmitter.emit('status', 200, 'ok');    // Got 200 and ok
-```
-
-## Unregistering events
-You can remove listeners with `off` (or with `removeListener`):
-```js
-myEmitter.off('eventOne');
-myEmitter.removeListener('eventOne', myCallback);
-```
-
-## Getting listeners
-If you need the list of listeners linked to an event:
-```js
-const myEmitter = new EventEmitter();
-myEmitter.on('eventOne', myCallback);
-
-console.log(myEmitter.listenerCount());         // 1
-console.log(myEmitter.listeners('eventOne'));   // array of listeners
-console.log(myEmitter.rawListeners('eventOne'));   // array of listeners, including wrappers linke .once()
-```
-
-### Events resources
-- https://www.freecodecamp.org/news/how-to-code-your-own-event-emitter-in-node-js-a-step-by-step-guide-e13b7e7908e1/
-- https://nodejs.org/dist/latest-v14.x/docs/api/events.html
-
-\pagebreak
-# Modules
-`require` and `module` are the two modules available in global scope used to manage modules.
-In each module, `exports` is a special object (empty by deafault) returned by the `require` function.
-
-```js
-const config = require('/path/to/file');
-```
-
-### Resolving
-Required file is resolved searching, in order, files with the following extensions: js, json, node.
-The latter is a c++ file, compiled with node-gyp.
-
-A list of the paths where a required file is searched, is given by `module.paths`:
-```
-$ node
-> module.paths
-[
-  '/home/nicola/nodeprojects/node-certification/repl/node_modules',
-  '/home/nicola/nodeprojects/node-certification/node_modules',
-  '/home/nicola/nodeprojects/node_modules',
-  '/home/nicola/node_modules',
-  '/home/node_modules',
-  '/node_modules',
-  '/home/nicola/.node_modules',
-  '/home/nicola/.node_libraries',
-  '/usr/local/lib/node'
-]
-```
-
-You may **require a folder**: node will search for an index.js in it to import.
-
-`require.resolve('file')` only returns the resolved file path or throws an error when no file is found on paths.
-
-### Loading
-`require()` loads end evaluates files in synchronous mode. Loading a file, its code is executed.
-A loaded module contains a stucture like this:
-```
-{
-  id: '.',
-  exports: {},
-  parent: null,
-  filename: '/Users/samer/learn-node/index.js',
-  loaded: false,
-  children: [],
-  paths: [ ... ]
-}
-```
-
-#### Modules dependency
-When referencing a module from another module, since node executes the code sequentially,
-the lines following requiring module2 are executed after module2 has been required and executed.
-For ths reason module2 does not know the existance of module1.b and moduls2.c
-```
-// module1.js
-exports.a = 1;
-require('module2');
-exports.b = 2;
-exports.c = 3;
-
-// module2.js
-const Module1 = require('./module1');
-console.log('Module1 is partially loaded here', Module1)
-
-// output:
-Module1 is partially loaded here { a: 1 }
-```
-
-Note: `module.exports` cannot be changed at runtime, once it's set it's set.
-
-### Requiring JSON files
-Node recognizes JSON required files. As example, this config.json:
-```json
-{
-  "host": "localhost",
-  "port": 8080
-}
-```
-
-Can be imported this way:
-```js
-const { host, port } = require('./config');
-console.log(`Server will run at http://${host}:${port}`);
-```
-
-### Modules resources:
-- https://www.freecodecamp.org/news/requiring-modules-in-node-js-everything-you-need-to-know-e7fbd119be8/
 
 
