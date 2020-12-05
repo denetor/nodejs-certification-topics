@@ -5,14 +5,14 @@ Topics are listed at this site:
 https://www.nodecertification.com/
 
 ### Node.js Application Developer Certification (JSNAD)
-- [x] [Buffers](#buffers)
-- [x] [Streams](#streams)
-- [x] [Control flow](#controlflow)
+- [x] [Buffers](#Buffers)
+- [x] [Streams](#Streams)
+- [x] [Control flow](#control-flow)
 - [ ] Child processes
 - [ ] Debugging
 - [ ] Error handling
 - [ ] CLI
-- [ ] Events
+- [x] [Events](#Events)
 - [ ] File system
 - [ ] Javascript prerequisites
 - [x] [Module system](#modules)
@@ -33,7 +33,10 @@ https://www.nodecertification.com/
 - [ ] https://github.com/workshopper/scope-chains-closures
 - [ ] https://github.com/workshopper/how-to-npm
 
+### Other learning resources
+- https://nodejs.dev/learn
 
+\pagebreak
 # Buffers
 Buffers are subclass of `Uint8Array` and are a fixed length bytes sequence.
 Every buffer element is an integer between 0 and 255.
@@ -109,9 +112,8 @@ console.log(buf.toString());        // 'Hoy!'
 - https://nodejs.dev/learn/nodejs-buffers
 - https://nodejs.org/api/buffer.html
 
-
+\pagebreak
 # Streams
-
 Simplest use of streams is serving a file without keeping busy the server:
 ```js
 const http = require('http');
@@ -255,7 +257,7 @@ Some info here: https://github.com/dmitriz/stream-handbook#classic-streams
 - https://github.com/dmitriz/stream-handbook
 - https://nodejs.org/api/stream.html
 
-
+\pagebreak
 # Control flow
 
 ## Callbacks
@@ -340,6 +342,8 @@ launcher();
 ```
 
 ## Promises
+_(all Nodejs versions)_
+
 Promises allow more readable code than using callbacks:
 ```js
 // Using Promises
@@ -396,6 +400,9 @@ fetch("http://jsonplaceholder.typicode.com/users/1")
 ```
 
 ## Async/await
+
+_(node 7.6.0+)
+
 `async` and `await` gives the asynchronous software a synchronous appearance.
 Async functions will implicitly return a Promise.
 
@@ -419,13 +426,13 @@ Similarly to synchronous code, with async/await, errors are handled by wrapping
 // Wrap await calls in try...catch to catch any errors.
 async function handleAsync() {
 	try {
-		const data = await fetch('url').then(res => res.json()
-		console.log(data)
+		const data = await fetch('url').then(res => res.json());
+		console.log(data);
 	} catch(error) {
 		// If the fetch call has any errors, or if the Promise it
 		// returns is rejected, an error is thrown and we can process it
 		// here.
-		console.log('Uh oh!', error)
+		console.log('Uh oh!', error);
 	}
 }
 handleAsync()
@@ -435,7 +442,7 @@ Because an async function returns a Promise implicitly, we can also attach a
 `catch` handler to the `async` function call:
 ```js
 async function catchAsync() {
-	const data = await fetch('url').then(res => res.json();
+	const data = await fetch('url').then(res => res.json());
 	console.log(data);
 }
 catchAsync.catch(error => console.log('Uh oh!', error));
@@ -448,6 +455,66 @@ catchAsync.catch(error => console.log('Uh oh!', error));
 - https://heynode.com/tutorial/use-asyncawait-promises
 
 
+\pagebreak
+# Events
+Promises and many other features are made with event management.
+Events are used trough EventEmitter class.
+
+## Creating, listening and emitting
+```js
+// creating an EventEmitter
+const myEmitter = new EventEmitter();
+
+// registering three callbacks. 
+myEmitter.on('eventOne', callback1);
+myEmitter.on('eventOne', callback2);
+myEmitter.addListener('eventOne', callback3);   // on and addListener are synonyms
+
+// emitting the event
+myEmitter.emit('eventOne'); // all the three callbacks will be called
+```
+
+## Once listener
+Registers for an event that may be emitted only once. Internally, when the event is
+listened for the first time, all its listeners will be removed.
+```js
+const myEmitter = new EventEmitter();
+myEmitter.once('myEvent', myCallback);
+
+myEmitter.emit('myEvent');  // lauches callback
+myEmitter.emit('myEvent');  // does not launch any callback again
+```
+
+## Callback parameters
+We can add parameters to callbacks
+```js
+myEmitter.on('status', (code, msg)=> console.log(`Got ${code} and ${msg}`));
+myEmitter.emit('status', 200, 'ok');    // Got 200 and ok
+```
+
+## Unregistering events
+You can remove listeners with `off` (or with `removeListener`):
+```js
+myEmitter.off('eventOne');
+myEmitter.removeListener('eventOne', myCallback);
+```
+
+## Getting listeners
+If you need the list of listeners linked to an event:
+```js
+const myEmitter = new EventEmitter();
+myEmitter.on('eventOne', myCallback);
+
+console.log(myEmitter.listenerCount());         // 1
+console.log(myEmitter.listeners('eventOne'));   // array of listeners
+console.log(myEmitter.rawListeners('eventOne'));   // array of listeners, including wrappers linke .once()
+```
+
+### Events resources
+- https://www.freecodecamp.org/news/how-to-code-your-own-event-emitter-in-node-js-a-step-by-step-guide-e13b7e7908e1/
+- https://nodejs.org/dist/latest-v14.x/docs/api/events.html
+
+\pagebreak
 # Modules
 `require` and `module` are the two modules available in global scope used to manage modules.
 In each module, `exports` is a special object (empty by deafault) returned by the `require` function.
