@@ -13,7 +13,7 @@ https://www.nodecertification.com/
 - [x] [Child processes](cheatsheets/child-processes.md)
 - [x] Debugging and [profiling](cheatsheets/profiling.md)
 - [x] [Error handling](cheatsheets/error-handling.md)
-- [ ] File system
+- [x] [File system](cheatsheets/file-system.md)
 - [ ] Javascript prerequisites
 - [ ] Process/Operating system
 - [ ] Package.json
