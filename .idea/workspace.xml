@@ -2,6 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="211ceda6-254e-4ace-a3e1-c6ac24710737" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/cheatsheets/buffers.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cheatsheets/child-processes.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cheatsheets/control-flow.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cheatsheets/error-handling.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cheatsheets/events.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cheatsheets/modules.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cheatsheets/profiling.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cheatsheets/streams.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
@@ -107,7 +115,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/buffers" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/cheatsheets" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -121,6 +129,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cheatsheets" />
       <recent name="$PROJECT_DIR$/src/buffers" />
     </key>
   </component>
@@ -161,7 +170,7 @@
       <workItem from="1607166708741" duration="3692000" />
       <workItem from="1607199974171" duration="3878000" />
       <workItem from="1607260095996" duration="3536000" />
-      <workItem from="1607265925386" duration="1365000" />
+      <workItem from="1607265925386" duration="2523000" />
     </task>
     <servers />
   </component>
