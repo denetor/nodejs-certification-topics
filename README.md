@@ -14,12 +14,13 @@ https://www.nodecertification.com/
 - [x] Debugging and [profiling](cheatsheets/profiling.md)
 - [x] [Error handling](cheatsheets/error-handling.md)
 - [x] [File system](cheatsheets/file-system.md)
-- [ ] Javascript prerequisites
-- [ ] Process/Operating system
+- [ ] Javascript prerequisites (just learn js)
+- [ ] [Process](cheatsheets/process.md)/[Operating system](cheatsheets/os.md)
 - [ ] Package.json
 - [ ] Unit testing
 - [ ] Cluster module (no part of JSNAD)
 - [x] CLI (just check the manual)
+- [-] [Node/javascript features table](cheatsheets/versions.md)
 
 ### Node.js Services Developer Certification (JSNSD)
 - [ ] Servers and services
