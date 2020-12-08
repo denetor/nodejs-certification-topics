@@ -15,7 +15,7 @@ https://www.nodecertification.com/
 - [x] [Error handling](cheatsheets/error-handling.md)
 - [x] [File system](cheatsheets/file-system.md)
 - [ ] Javascript prerequisites (just learn js)
-- [ ] [Process](cheatsheets/process.md)/[Operating system](cheatsheets/os.md)
+- [x] [Process](cheatsheets/process.md)/[Operating system](cheatsheets/os.md)
 - [ ] Package.json
 - [ ] Unit testing
 - [ ] Cluster module (no part of JSNAD)
