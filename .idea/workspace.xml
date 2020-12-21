@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="211ceda6-254e-4ace-a3e1-c6ac24710737" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/cheatsheets/package-json.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cheatsheets/jest.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cheatsheets/versions.md" beforeDir="false" afterPath="$PROJECT_DIR$/cheatsheets/versions.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,7 +168,9 @@
       <workItem from="1607294128330" duration="1427000" />
       <workItem from="1607416179564" duration="1976000" />
       <workItem from="1607437006982" duration="1978000" />
-      <workItem from="1607440938593" duration="635000" />
+      <workItem from="1607440938593" duration="4171000" />
+      <workItem from="1607445888191" duration="360000" />
+      <workItem from="1608498138849" duration="8355000" />
     </task>
     <servers />
   </component>

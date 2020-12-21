@@ -17,7 +17,7 @@ https://www.nodecertification.com/
 - [ ] Javascript prerequisites (just learn js)
 - [x] [Process](cheatsheets/process.md)/[Operating system](cheatsheets/os.md)
 - [x] [Package.json](cheatsheets/package-json.md)
-- [ ] Unit testing
+- [x] [Unit testing (with Jest)](cheatsheets/jest.md)
 - [ ] Cluster module (no part of JSNAD)
 - [x] CLI (just check the manual)
 - [-] [Node/javascript features table](cheatsheets/versions.md)
