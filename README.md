@@ -9,6 +9,7 @@ https://www.nodecertification.com/
 - [x] [Events](cheatsheets/events.md)
 - [x] [Buffers](cheatsheets/buffers.md)
 - [x] [Streams](cheatsheets/streams.md)
+  - [x] [Stream adventures exercises](exercises/stream-adventures.md)
 - [x] [Control flow](cheatsheets/control-flow.md)
 - [x] [Child processes](cheatsheets/child-processes.md)
 - [x] Debugging and [profiling](cheatsheets/profiling.md)
@@ -20,7 +21,7 @@ https://www.nodecertification.com/
 - [x] [Unit testing (with Jest)](cheatsheets/jest.md)
 - [ ] Cluster module (no part of JSNAD)
 - [x] CLI (just check the manual)
-- [-] [Node/javascript features table](cheatsheets/versions.md)
+- [x] [Node/javascript features table](cheatsheets/versions.md)
 
 ### Node.js Services Developer Certification (JSNSD)
 - [ ] Servers and services
@@ -38,4 +39,5 @@ https://www.nodecertification.com/
 
 ### Other learning resources
 - https://nodejs.dev/learn
+- https://github.com/goldbergyoni/nodebestpractices#readme
 
