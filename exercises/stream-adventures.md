@@ -192,3 +192,80 @@ const req = http.request('http://localhost:8099', httpOptions, (res) => {
 });
 process.stdin.pipe(req);
 ```
+
+
+## 11 - WEBSOCKETS
+In this adventure, write a websocket client that uses the ws module,
+generate a stream on top of the websocket client, write the string
+"hello\n" to the stream and pipe it to process.stdout.
+
+```js
+'use strict';
+const WebSocket = module.require('ws');
+
+const ws = new WebSocket('ws://localhost:8099');
+const stream = WebSocket.createWebSocketStream(ws);
+stream.pipe(process.stdout);
+stream.write("hello\n");
+```
+
+
+
+## 12 - HTML STREAM
+Your program will get some html written to stdin. Convert all the inner
+html to upper-case for elements with a class name of "loud", and pipe all
+the html to stdout.
+
+https://github.com/luong-komorebi/Stream-Adventure-Solutions/blob/master/html-stream.js
+
+
+## 13 - DUPLEXER
+Write a program that exports a function that spawns a process from a cmd
+string and an args array and returns a single duplex stream joining
+together the stdin and stdout of the spawned process
+
+```js
+'use strict';
+const { spawn } = module.require('child_process');
+var duplexer2 = require('duplexer2');
+
+module.exports = function(cmd, args) {
+    // spawn the process and return a single stream
+    const spawnedProcess = spawn(cmd, args);
+    // joining together the stdin and stdout here
+    const duplexStream = duplexer2(spawnedProcess.stdin, spawnedProcess.stdout);
+
+    return duplexStream;
+};
+```
+
+
+## 14 - DUPLEXER REDUX
+In this example, you will be given a readable stream, counter, as the
+first argument to your exported function:
+```js
+module.exports = function (counter) {  
+// return a duplex stream to count countries on the writable side  
+// and pass through `counter` on the readable side  
+}
+```
+
+Return a duplex stream with the counter as the readable side. You will be
+written objects with a 2-character country field as input, such as these:
+```js
+{"short":"OH","name":"Ohio","country":"US"}  
+{"name":"West Lothian","country":"GB","region":"Scotland"}  
+{"short":"NSW","name":"New South Wales","country":"AU"}
+```
+
+Create an object to track the number of occurrences of each unique country
+code. For example:
+```js
+{"US": 2, "GB": 3, "CN": 1}
+``` 
+
+Once the input ends, call counter.setCounts() with your counts object.
+
+```js
+
+```
