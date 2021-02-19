@@ -37,6 +37,10 @@ https://www.nodecertification.com/
 - [ ] https://github.com/workshopper/how-to-npm
 - [ ] https://www.vskills.in/practice/index.php?route=test/search&search=node
 
+### Checklists
+- [ ] [Node.js checklist](checklists/node-checklist.md)
+- [ ] [Angular checklist](checklists/angular-checklist.md)
+
 ### Other learning resources
 - https://nodejs.dev/learn
 - https://github.com/goldbergyoni/nodebestpractices#readme
