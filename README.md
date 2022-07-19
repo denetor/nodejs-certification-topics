@@ -38,7 +38,9 @@ https://www.nodecertification.com/
 - [ ] https://www.vskills.in/practice/index.php?route=test/search&search=node
 
 ### Design patterns
-- [Modules](design-patterns/modules.md)
+- [Modules](design-patterns/00-modules.md)
+- [Callbacks and events](design-patterns/01-callback-events.md)
+- [Asynchronous flow patterns](design-patterns/02-asynchronous-flow-patterns.md)
 
 ### Checklists
 - [ ] [Node.js checklist](checklists/node-checklist.md)
