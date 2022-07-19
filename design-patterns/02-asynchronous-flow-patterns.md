@@ -18,3 +18,8 @@ function finish() {
 // start iteration
 iterate(0);
 ```
+
+To add better readability we could wrap all into functin like:
+```
+iterateSerie(tasks, forEachCallback, finishCallback);
+```
