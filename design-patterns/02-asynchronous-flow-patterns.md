@@ -23,3 +23,21 @@ To add better readability we could wrap all into functin like:
 ```
 iterateSerie(tasks, forEachCallback, finishCallback);
 ```
+
+
+## Callback parallel pattern
+```
+const tasks = [];
+let completed = 0;
+tasks.forEach(() => {
+  task(() => {
+    if (++completed === tasks.length) {
+      finish();
+    }
+  });
+});
+function finish() {
+  //...
+}
+```
+
