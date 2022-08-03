@@ -40,7 +40,9 @@ https://www.nodecertification.com/
 ### Design patterns
 - [Modules](design-patterns/00-modules.md)
 - [Callbacks and events](design-patterns/01-callback-events.md)
-- [Asynchronous flow patterns](design-patterns/02-asynchronous-flow-patterns.md)
+- [ ] [Asynchronous flow patterns](design-patterns/02-asynchronous-flow-patterns.md) TODO Promises and async/await
+- [ ] TODO [Streams]()
+- [Creation patterns](design-patterns/04-creation-patterns.md)
 
 ### Checklists
 - [ ] [Node.js checklist](checklists/node-checklist.md)
