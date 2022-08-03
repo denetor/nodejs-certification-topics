@@ -44,5 +44,37 @@ const giulio = catFactory('Giulio');
 
 
 ## Builder
+Builder is useful to simplify instance creation when has many configuration values. You could pass a configuration object in the constructor:
+```
+const cat = new Cat({name: 'Giulio', hairLength: 'long', hairColor: 'red', aggressive: true});
+```
 
-## Revealing constructor
+or you clould use a builder to increase readability:
+```
+class CatBuilder {
+  hasName(name) {
+    this.name = name;
+    return this;
+  }
+  hair(length, color) {
+    this.hairLength = length;
+    this.hairColor = color;
+    return this;
+  }
+  isAggressive(aggressive) {
+    this.aggressive = aggressive;
+    return this;
+  }
+  build() {
+    return new Cat({name: this.name, hairLength: this.hairLength, hairColor: this.hairColor, aggressive: this.aggressive});
+  }
+}
+
+const cat = new CatBuilder()
+  .hasName('Giulio')
+  .hair('long', 'red')
+  .isAggressive()
+  .build();
+```
+
+
