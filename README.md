@@ -43,7 +43,7 @@ https://www.nodecertification.com/
 - [ ] [Asynchronous flow patterns](design-patterns/02-asynchronous-flow-patterns.md) TODO Promises and async/await
 - [ ] TODO [Streams]()
 - [Creation patterns](design-patterns/04-creation-patterns.md)
-- [rxjs](design-patterns/rxjs.md)
+- [rxjs](design-patterns/05-rxjs.md)
 
 ### Checklists
 - [ ] [Node.js checklist](checklists/node-checklist.md)
