@@ -156,6 +156,7 @@ There are 2 kinds of operators:
 
 ### Creation operators
 Some of these operators are:
+- from
 - of
 - interval
 - ajax
@@ -205,6 +206,12 @@ subscription.add(
 subscription.add(
   of(7, 8, 9).subscribe((data) => {
     console.log("condensed 'of' observable emitted: " + data);
+  })
+);
+
+subscription.add(
+  from([10, 11, 12]).subscribe((data) => {
+    console.log("'from' observable emitted: " + data);
   })
 );
 
@@ -307,7 +314,44 @@ subscription.add(
 Try online: https://codesandbox.io/s/rxjs-operators-example-5uolqe?file=/src/index.ts
 
 
-### Performing http requests with rxjs
+### Common ionteractions with rxjs
+Sometimes it's useful to treat other data sources as Observables.
+
+#### Array
+```
+from([{name: 'Adam', name: 'Bob', name: 'Craig'}]).subscribe((person) => {
+    console.log("Processing: " + person.name);
+});
+```
+
+#### UI Event
+```
+import { fromEvent } from "rxjs";
+
+fromEvent(document.getElementById("someButton"), "click").subscribe((event) => {
+  document.getElementById("output").innerHTML = `thanks`;
+});
+```
+Try online: https://codesandbox.io/s/rxjs-operator-fromevent-example-fv6dh9
+
+#### Callbacks
+```
+import { bindCallback } from "rxjs";
+
+function oldFunction(cb) {
+  setTimeout(() => cb(null, 'Hello'), 1000);
+}
+
+bindCallback(oldFunction).subscribe((err, data) => {
+  console.log('oldFunction returned: ' + data);
+});
+```
+
+#### fetch()
+
+#### ajax()
+
+
 TODO: continue from here: https://rxjs.dev/guide/operators
 
 
