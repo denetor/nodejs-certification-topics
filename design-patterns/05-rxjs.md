@@ -96,12 +96,65 @@ Try online: https://codesandbox.io/s/rxjs-observer-example-96loeb?file=/src/inde
 
 
 TODO: continue from here: https://rxjs.dev/guide/observer
-## Producer
 
 ## Subscriptions
+A Subscription is an object able to wait for and receive data emitted from Observables.
+
+A Subscription must be unsubscribed when no more necessary, to avoid data leaks.
+
+```
+import { Observable, Subscription } from "rxjs";
+
+// create observable
+const observable = new Observable(function subscribe(subscriber) {
+  let i = 0;
+  setInterval(() => {
+    subscriber.next(i++);
+    if (i > 5) {
+      subscriber.complete();
+    }
+  }, 1000);
+});
+
+const observable2 = new Observable(function subscribe(subscriber) {
+  let i = 0;
+  let words = ["Hello", "world", "!"];
+  setInterval(() => {
+    subscriber.next(words[i++]);
+    if (i > 2) {
+      subscriber.complete();
+    }
+  }, 500);
+});
+
+// create subscription
+const subscription = new Subscription();
+// add subscriptions
+subscription.add(
+  observable.subscribe((data) => {
+    console.log("observable emitted: " + data);
+  })
+);
+subscription.add(
+  observable2.subscribe((data) => {
+    console.log("observable2 emitted: " + data);
+  })
+);
+
+// cleanup all subscription s after some time
+setInterval(() => {
+  console.log("removing all subscriptions");
+  subscription.unsubscribe();
+}, 10000);
+```
+Try online: https://codesandbox.io/s/rxjs-subscription-example-i95qqd?file=/src/index.ts:0-969
 
 ## Operators
 
 ## Subjects
+
+## Producer
+
+## Consumer
 
 ## Error management
