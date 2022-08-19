@@ -155,6 +155,15 @@ There are 2 kinds of operators:
 - Pipeable operators: functions returning a new Observable, where value is a transformation of another Observable (left intact)
 
 ### Creation operators
+Some of these operators are:
+- of
+- interval
+- ajax
+- bindCallback
+- timer
+- range
+See complete list at https://rxjs.dev/guide/operators#creation-operators-1
+
 ```
 import { Observable, Subscription, of, interval } from "rxjs";
 
@@ -207,6 +216,98 @@ setTimeout(() => {
 Try online: https://codesandbox.io/s/rxjs-observable-example-vllwq5?file=/src/index.ts
 
 ### Pipeable operators
+Are used to transform or filter data coming from Observables. Piping them together allows to concatenate transformations.
+
+Some sample operators are:
+- map
+- mergeMap
+- concat
+- forkJoin
+- race
+- debounce
+- distinct
+- filter
+- last
+- take
+- takeUntil
+- find
+- isEmpty
+- count
+- reduce
+
+A complete listing is available at https://rxjs.dev/guide/operators#join-creation-operators
+
+```
+import { Subscription, of, filter, distinct, take, reduce, delay } from "rxjs";
+
+const subscription = new Subscription();
+
+const results = {
+  noFilters: [],
+  even: [],
+  evenGt5: [],
+  sumFirst2Odd: []
+};
+
+// subscription with no operators
+subscription.add(
+  of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9).subscribe((n) => {
+    results.noFilters.push(n);
+  })
+);
+
+// simple filtering only even numbers
+subscription.add(
+  of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+    .pipe(filter((n) => n % 2 === 0))
+    .subscribe((n) => {
+      results.even.push(n);
+    })
+);
+
+// 2 filters piped together
+subscription.add(
+  of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+    .pipe(
+      filter((n) => n >= 5),
+      filter((n) => n % 2 === 0)
+    )
+    .subscribe((n) => {
+      results.evenGt5.push(n);
+    })
+);
+
+// sums first 2 distinct odd numbers (1+3)
+subscription.add(
+  of(0, 1, 1, 1, 1, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+    .pipe(
+      filter((n) => n % 2 === 1),
+      distinct(),
+      take(2),
+      reduce((acc, curr) => (acc += curr))
+    )
+    .subscribe((n) => {
+      results.sumFirst2Odd.push(n);
+    })
+);
+
+// instead of using setTimeout we use an observable piped to a delay operator
+subscription.add(
+  of(1)
+    .pipe(delay(500))
+    .subscribe(() => {
+      subscription.unsubscribe();
+      console.log("unsubscribing all subscriptions");
+      for (const row in results) {
+        console.log(row + ": " + results[row].join(","));
+      }
+    })
+);
+```
+Try online: https://codesandbox.io/s/rxjs-operators-example-5uolqe?file=/src/index.ts
+
+
+### Performing http requests with rxjs
 TODO: continue from here: https://rxjs.dev/guide/operators
 
 
