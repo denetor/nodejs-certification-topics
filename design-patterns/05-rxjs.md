@@ -15,7 +15,7 @@ var output = "";
 
 // create observable
 const observable = new Observable(function subscribe(subscriber) {
-  const id = setInterval(() => {
+  setInterval(() => {
     subscriber.next("hello");
   }, 1000);
 });
@@ -95,8 +95,6 @@ observable.subscribe(observer);
 Try online: https://codesandbox.io/s/rxjs-observer-example-96loeb?file=/src/index.ts
 
 
-TODO: continue from here: https://rxjs.dev/guide/observer
-
 ## Subscriptions
 A Subscription is an object able to wait for and receive data emitted from Observables.
 
@@ -149,7 +147,68 @@ setInterval(() => {
 ```
 Try online: https://codesandbox.io/s/rxjs-subscription-example-i95qqd?file=/src/index.ts:0-969
 
-## Operators
+
+## Operators and Pipes
+There are 2 kinds of operators:
+
+- Creation operators: functions returning a new Observable
+- Pipeable operators: functions returning a new Observable, where value is a transformation of another Observable (left intact)
+
+### Creation operators
+```
+import { Observable, Subscription, of, interval } from "rxjs";
+
+// creating standard Observable
+const observable = new Observable(function subscribe(subscriber) {
+  subscriber.next(1);
+  subscriber.next(2);
+  subscriber.next(3);
+  subscriber.complete();
+});
+
+// using of()
+const observable2 = of(4, 5, 6);
+
+// using interval()
+const observable3 = interval(1000);
+
+// create subscription
+const subscription = new Subscription();
+
+subscription.add(
+  observable.subscribe((data) => {
+    console.log("standard observable emitted: " + data);
+  })
+);
+
+subscription.add(
+  observable2.subscribe((data) => {
+    console.log("'of' observable emitted: " + data);
+  })
+);
+
+subscription.add(
+  observable3.subscribe((data) => {
+    console.log("'interval' observable emitted: " + data);
+  })
+);
+
+subscription.add(
+  of(7, 8, 9).subscribe((data) => {
+    console.log("condensed 'of' observable emitted: " + data);
+  })
+);
+
+setTimeout(() => {
+  subscription.unsubscribe();
+  console.log("unsubscribed to any subscription");
+}, 5500);
+```
+Try online: https://codesandbox.io/s/rxjs-observable-example-vllwq5?file=/src/index.ts
+
+### Pipeable operators
+TODO: continue from here: https://rxjs.dev/guide/operators
+
 
 ## Subjects
 
