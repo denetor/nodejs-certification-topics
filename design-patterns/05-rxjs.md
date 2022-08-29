@@ -358,14 +358,17 @@ console.log(response.data);
 
 
 #### fetch()
+`fetch()` is a web standard API available in browsers.
+It's **based on Promises** so we have to convert it to an Observable to use it with RxJs.
+
+TODO continue from here: https://leggi.amazon.it/?asin=B0753HNW7Z&ref_=kwl_kr_iv_rec_1&language=it-IT
 
 #### ajax()
-
-
-TODO: continue from here: https://rxjs.dev/guide/operators
+`ajax()' is a service provided in RxJs Library.
 
 
 ## Subjects
+TODO: continue from here: https://rxjs.dev/guide/operators
 
 ## Producer
 
