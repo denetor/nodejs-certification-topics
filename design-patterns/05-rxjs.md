@@ -347,6 +347,16 @@ bindCallback(oldFunction).subscribe((err, data) => {
 });
 ```
 
+#### HTTP Calls
+```
+import { lastValueFrom } from "rxjs";
+
+const config: AxiosRequestConfig = {...};
+const response = await lastValueFrom(this.httpService.request(config));
+console.log(response.data);
+```
+
+
 #### fetch()
 
 #### ajax()
