@@ -359,7 +359,16 @@ console.log(response.data);
 
 #### fetch()
 `fetch()` is a web standard API available in browsers.
-It's **based on Promises** so we have to convert it to an Observable to use it with RxJs.
+It's **based on Promises** so we have to convert it to an Observable to use it with RxJs. Submitting to this Observable we obtain a Response object: we have to convert this Response to json witn json() method, but json() too returns a Promise.
+
+So we have two Observables nested and must be combined with some operator. This operator can be **mergeMap** (ex flatMap).
+
+Example:
+```
+let observable = Rx.Observable.from(fetch('some url')
+  .mergeMap( response => Rx.Observable.from(response.json())));
+ observable.subscribe(data => console.log(data));
+```
 
 TODO continue from here: https://leggi.amazon.it/?asin=B0753HNW7Z&ref_=kwl_kr_iv_rec_1&language=it-IT
 
