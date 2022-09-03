@@ -367,13 +367,20 @@ Example:
 ```
 let observable = Rx.Observable.from(fetch('some url')
   .mergeMap( response => Rx.Observable.from(response.json())));
- observable.subscribe(data => console.log(data));
+observable.subscribe(data => console.log(data));
 ```
 
-TODO continue from here: https://leggi.amazon.it/?asin=B0753HNW7Z&ref_=kwl_kr_iv_rec_1&language=it-IT
-
 #### ajax()
-`ajax()' is a service provided in RxJs Library.
+`ajax()' is a service provided in RxJs Library and is based on Observable.
+
+```
+let observable = Rx.Observable.ajax('some url')
+    .map(r => r.response);
+observable.subscribe(data => console.log(data));
+```
+
+
+TODO continue from here: https://leggi.amazon.it/?asin=B0753HNW7Z&ref_=kwl_kr_iv_rec_1&language=it-IT
 
 
 ## Subjects
