@@ -379,8 +379,62 @@ let observable = Rx.Observable.ajax('some url')
 observable.subscribe(data => console.log(data));
 ```
 
+#### Cascading calls
+In the real world calls are often performed after the response from other calls arrives. This happens when you must perform login before retrieving some other data.
+Moreover, it's common to have to fetch some other calls in parallel, as they are not dependant each other.
 
-TODO continue from here: https://leggi.amazon.it/?asin=B0753HNW7Z&ref_=kwl_kr_iv_rec_1&language=it-IT
+As example we can do:
+- login
+- fetch user information
+- fetch, in parallel, other information given the user
+
+```
+import Rx from 'rxjs/Rx';
+const username = 'john';
+const password = 'johnrulez';
+
+login(user, password)
+  .switchMap(getUser)
+  .switchMap(getUserData);
+  
+// this is the equivalent of
+// login()
+//   .then(getUser)
+// .then(getUserData);
+  
+const login = (username, password) => {
+  return Rx.Observable.ajax('/login', {
+    method: 'POST',
+    body: {username, password},
+  })
+  .map(r => r.response)
+  .do(token => localStorage.set('jwtToken', token));
+}
+
+const getUser = () => {
+  return Rx.Observable.ajax('/users', {
+    headers: { Authorization: 'Bearer ' + localStorage.get('jwtToken')}
+  }).map(r => r.response);
+}
+
+getUserData(user) {
+  return Rx.Observable.forkJoin([
+    getOrders(),
+    getMessages(),
+    getFriends(),
+  ]);
+}
+
+const getOrders = () => {
+  return Rx.Observable.json('/orders/user/' + user.id, {...}).map(r => r.response);
+}
+const getMessages = () => {
+  return Rx.Observable.json('/messages/user/' + user.id, {...}).map(r => r.response);
+}
+const getFriends = () => {
+  return Rx.Observable.json('/friends/user/' + user.id, {...}).map(r => r.response);
+}
+```
 
 
 ## Subjects
