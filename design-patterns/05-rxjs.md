@@ -57,6 +57,9 @@ observable.subscribe((x) => {
 ```
 Try online: https://codesandbox.io/s/rxjs-observable-events-example-6fhwll?file=/src/index.ts
 
+### Producer
+Producer is an internal component of the Observable, the "thig" that creates the actual data emitted by Observable.
+
 
 ## Observer
 An Observer is a consumer of values delivered by an Observable.
@@ -439,8 +442,6 @@ const getFriends = () => {
 
 ## Subjects
 TODO: continue from here: https://rxjs.dev/guide/operators
-
-## Producer
 
 ## Consumer
 
