@@ -439,6 +439,24 @@ const getFriends = () => {
 }
 ```
 
+#### Cascading calls in nestjs
+With lastValueFrom operator we can confert an observable to a Promise we can return.
+```
+async allTests(): Promise<any> {
+    return lastValueFrom(
+        rxjs.forkJoin([
+            this.coherenceCheckService.checkPeople(),
+            this.coherenceCheckService.supplyAddresses(),
+        ]),
+    ).then((response) => {
+        return {
+            people: response[0],
+            addresses: response[1],
+        };
+    });
+}
+```
+
 
 ## Subjects
 TODO: continue from here: https://rxjs.dev/guide/operators
