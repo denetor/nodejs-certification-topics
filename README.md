@@ -44,6 +44,7 @@ https://www.nodecertification.com/
 - [ ] TODO [Streams]()
 - [Creation patterns](design-patterns/04-creation-patterns.md)
 - [rxjs](design-patterns/05-rxjs.md)
+- [redux](design-patterns/06-redux.md)
 
 ### Checklists
 - [ ] [Node.js checklist](checklists/node-checklist.md)
